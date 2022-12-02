@@ -1,0 +1,5 @@
+{
+  "customVariables": ["eventYear", "eventDay", "puzzleName"],
+  "omitFTName": true,
+  "omitParentDirectory": true
+}

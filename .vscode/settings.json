@@ -1,0 +1,109 @@
+{
+  "folderTemplates.structures": [
+    {
+      "name": "AoC Event",
+      "structure": [
+        {
+          "fileName": "00",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "01",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "02",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "03",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "04",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "05",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "06",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "07",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "08",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "09",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "10",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "11",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "12",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "13",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "14",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "15",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "16",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "17",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "18",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "19",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "20",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "21",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "22",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "23",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "24",
+          "template": "EmptyDirectory"
+        }
+      ]
+    }
+  ]
+}
