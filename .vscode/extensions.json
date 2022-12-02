@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "huuums.vscode-fast-folder-structure",
+    "mikestead.dotenv",
+    "editorconfig.editorconfig",
+    "orta.vscode-jest"
+  ]
+}

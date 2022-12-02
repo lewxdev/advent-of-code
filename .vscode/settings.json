@@ -2,108 +2,123 @@
   "folderTemplates.structures": [
     {
       "name": "AoC Event",
+      "customVariables": [
+        "eventYear"
+      ],
+      "omitFTName": true,
+      "omitParentDirectory": true,
       "structure": [
         {
-          "fileName": "1",
+          "fileName": "<eventYear>/1",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "2",
+          "fileName": "<eventYear>/2",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "3",
+          "fileName": "<eventYear>/3",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "4",
+          "fileName": "<eventYear>/4",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "5",
+          "fileName": "<eventYear>/5",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "6",
+          "fileName": "<eventYear>/6",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "7",
+          "fileName": "<eventYear>/7",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "8",
+          "fileName": "<eventYear>/8",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "9",
+          "fileName": "<eventYear>/9",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "10",
+          "fileName": "<eventYear>/10",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "11",
+          "fileName": "<eventYear>/11",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "12",
+          "fileName": "<eventYear>/12",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "13",
+          "fileName": "<eventYear>/13",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "14",
+          "fileName": "<eventYear>/14",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "15",
+          "fileName": "<eventYear>/15",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "16",
+          "fileName": "<eventYear>/16",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "17",
+          "fileName": "<eventYear>/17",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "18",
+          "fileName": "<eventYear>/18",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "19",
+          "fileName": "<eventYear>/19",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "20",
+          "fileName": "<eventYear>/20",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "21",
+          "fileName": "<eventYear>/21",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "22",
+          "fileName": "<eventYear>/22",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "23",
+          "fileName": "<eventYear>/23",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "24",
+          "fileName": "<eventYear>/24",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "25",
+          "fileName": "<eventYear>/25",
           "template": "EmptyDirectory"
         }
       ]
     }
-  ]
+  ],
+  "files.exclude": {
+    "node_modules": true,
+    "package-lock.json": true
+  },
+  "workspace.isHidden": true,
+  "jest.autoRun": {
+    "watch": "off",
+    "onStartup": "off",
+    "onSave": "test-src-file"
+  }
 }

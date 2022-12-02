@@ -1,0 +1,33 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "My personal, multi-event solutions for the annual series of programming challenges known as Advent of Code",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lewxdev/advent-of-code.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "J. Lewis",
+    "email": "inquiries.lewis+dev@gmail.com",
+    "url": "https://github.com/lewxdev"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lewxdev/advent-of-code/issues"
+  },
+  "homepage": "https://github.com/lewxdev/advent-of-code#readme",
+  "devDependencies": {
+    "@types/jest": "^29.2.3",
+    "jest": "^29.3.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [".fttemplates"]
+  }
+}
