@@ -1,13 +1,13 @@
 // https://adventofcode.com/<eventYear>/day/<eventDay>
 
-const EXAMPLE_INPUT = ``
-const EXAMPLE_OUTPUT = ["", ""]
+const EXAMPLE_INPUT = ""
+const EXAMPLE_OUTPUT = [null, null]
 
 /**
  * Your unique puzzle input
  * @see {@link https://adventofcode.com/<eventYear>/day/<eventDay>/input}
  */
-const puzzleInput = "" // replace me
+const puzzleInput = ""
 
 /** @param {string} input */
 const <puzzleName | camelcase>Part1 = (input) => {}

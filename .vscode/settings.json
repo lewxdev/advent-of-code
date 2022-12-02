@@ -4,43 +4,39 @@
       "name": "AoC Event",
       "structure": [
         {
-          "fileName": "00",
+          "fileName": "1",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "01",
+          "fileName": "2",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "02",
+          "fileName": "3",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "03",
+          "fileName": "4",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "04",
+          "fileName": "5",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "05",
+          "fileName": "6",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "06",
+          "fileName": "7",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "07",
+          "fileName": "8",
           "template": "EmptyDirectory"
         },
         {
-          "fileName": "08",
-          "template": "EmptyDirectory"
-        },
-        {
-          "fileName": "09",
+          "fileName": "9",
           "template": "EmptyDirectory"
         },
         {
@@ -101,6 +97,10 @@
         },
         {
           "fileName": "24",
+          "template": "EmptyDirectory"
+        },
+        {
+          "fileName": "25",
           "template": "EmptyDirectory"
         }
       ]

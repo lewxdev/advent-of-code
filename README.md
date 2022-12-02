@@ -39,14 +39,14 @@ arguments and templates for some languages
 ```js
 // https://adventofcode.com/2022/day/1
 
-const EXAMPLE_INPUT = `1000\n2000\n3000\n\n4000\n\n5000\n6000\n\n7000\n8000\n9000\n\n10000`
+const EXAMPLE_INPUT = "1000\n2000\n3000\n\n4000\n\n5000\n6000\n\n7000\n8000\n9000\n\n10000"
 const EXAMPLE_OUTPUT = [24_000, 45_000]
 
 /**
  * Your unique puzzle input
  * @see {@link https://adventofcode.com/2022/day/1/input}
  */
-const puzzleInput = "" // replace me
+const puzzleInput = ""
 
 /** @param {string} input */
 const calorieCountingPart1 = (input) => {}
@@ -58,13 +58,13 @@ const calorieCountingPart2 = (input) => {}
 const runTests = (() => {
   const $p = (result) => result === true ? "PASS" : "FAIL"
 
-  console.log("PART 1")
-  console.log(`example: ${$p(calorieCountingPart1(EXAMPLE_INPUT) === EXAMPLE_OUTPUT[0])}`)
-  console.log(`solution: ${calorieCountingPart1(puzzleInput)}`)
+  // PART 1
+  console.log(`example (1): ${$p(calorieCountingPart1(EXAMPLE_INPUT) === EXAMPLE_OUTPUT[0])}`)
+  console.log(`solution (1): ${calorieCountingPart1(puzzleInput)}`)
 
-  console.log("PART 2")
-  console.log(`example: ${$p(calorieCountingPart2(EXAMPLE_INPUT) === EXAMPLE_OUTPUT[1])}`)
-  console.log(`solution: ${calorieCountingPart2(puzzleInput)}`)
+  // PART 2
+  console.log(`example (2): ${$p(calorieCountingPart2(EXAMPLE_INPUT) === EXAMPLE_OUTPUT[1])}`)
+  console.log(`solution (2): ${calorieCountingPart2(puzzleInput)}`)
 })()
 //#endregion
 ```
