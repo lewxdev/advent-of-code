@@ -6,7 +6,7 @@ describe("2022/3", () => {
     expect(rucksackReorganizationPart1(EXAMPLE_INPUT)).toBe(157)
   })
 
-  test.skip("rucksackReorganizationPart2()", () => {
-    expect(rucksackReorganizationPart2(EXAMPLE_INPUT)).toBe(null)
+  test("rucksackReorganizationPart2()", () => {
+    expect(rucksackReorganizationPart2(EXAMPLE_INPUT)).toBe(70)
   })
 })
