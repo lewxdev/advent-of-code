@@ -1,54 +1,57 @@
 // Find the challenge here: https://adventofcode.com/2022/day/3
 
-/** @param {string} input - the provided puzzle input string */
-exports.rucksackReorganizationPart1 = (input) => {
-  return input.trim().split("\n").reduce((sum, rucksack) => {
-    const sliceIndex = rucksack.length / 2
-    const $c1 = rucksack.slice(0, sliceIndex)
-    const $c2 = rucksack.slice(sliceIndex)
+/** @param {string} item */
+const getItemValue = (item) =>
+  item.charCodeAt() - (item.match(/^[A-Z]$/) ? 38 : 96)
 
-    for (const item of $c1.split("")) {
-      if (!$c2.includes(item)) continue
-      return item.charCodeAt() - (item.match(/^[A-Z]$/) ? 38 : 96) + sum
-    }
-  }, 0)
+/**
+ * @param {string[]} setA
+ * @param {string[]} setB
+ * @returns {string[]}
+ */
+const getCommonItems = (setA, setB) => {
+  const [greaterSet, lesserSet] = setA.length !== setB.length
+    ? [setA, setB].sort((a, b) => b.length - a.length)
+    : [setA, setB]
+
+  return greaterSet.reduce((result, item) =>
+    lesserSet.includes(item) && !result.includes(item)
+      ? [...result, item]
+      : result,
+    []
+  )
 }
+
+
+/** @param {string} input - the provided puzzle input string */
+exports.rucksackReorganizationPart1 = (input) =>
+  input.trim().split("\n").reduce((sum, rucksack) => {
+    const items = rucksack.split("")
+    const sliceIndex = rucksack.length / 2
+
+    const compartmentA = items.slice(0, sliceIndex)
+    const compartmentB = items.slice(sliceIndex)
+    return getItemValue(getCommonItems(compartmentA, compartmentB).at(0)) + sum
+  }, 0)
 
 /** @param {string} input - the provided puzzle input string */
 exports.rucksackReorganizationPart2 = (input) => {
-  /** @type {string[][]} */
-  const groups = input.trim().split("\n").reduce((result, rucksack, index) => {
-    if (index % 3 === 0) return [...result, [rucksack]]
+  return input.trim().split("\n").reduce(
+    /** @param {{ group: string[]; sum: number }} */
+    ({ group, sum }, rucksack) => {
+      group = [...group, rucksack]
+      if (group.length < 3) return { group, sum }
 
-    result[Math.floor(index / 3)].push(rucksack)
-    return result
-  }, [])
-
-  /**
-   * @param {string[]} $a
-   * @param {string[]} $b
-   * @returns {string[]}
-   */
-  const getCommonItems = ($a, $b) => {
-    const [$1, $2] = [$a, $b].sort((a, b) => b.length - a.length)
-    return $1.reduce((result, item) =>
-      $2.includes(item) && !result.includes(item)
-        ? [...result, item]
-        : result,
-      []
-    )
-  }
-
-  return groups.reduce((sum, group) => {
-    const [$r1, $r2, $r3] = group.map((rucksack) => rucksack.split(""))
-
-    const [item] = getCommonItems(getCommonItems($r1, $r2), $r3)
-    return item.charCodeAt() - (item.match(/^[A-Z]$/) ? 38 : 96) + sum
-  }, 0)
+      const [setA, setB, setC] = group.map((rucksack) => rucksack.split(""))
+      const [item] = getCommonItems(getCommonItems(setA, setB), setC)
+      return { group: [], sum: getItemValue(item) + sum }
+    },
+    { group: [], sum: 0 }
+  ).sum
 }
 
 
 if (require.main === module) {
-  const testSolutions = require("testers/javascript")
+  const { testSolutions } = require("testers/javascript")
   testSolutions(__dirname, Object.values(exports))
 }

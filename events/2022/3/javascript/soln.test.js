@@ -1,12 +1,13 @@
-const { rucksackReorganizationPart1, rucksackReorganizationPart2 } = require("./soln")
+const { getUniquePuzzleInput, validateSolutions } = require("testers/javascript")
+const fns = require("./soln")
+
 const EXAMPLE_INPUT = "vJrwpWtwJgWrhcsFMMfFFhFp\njqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\nPmmdzqPrVvPwwTWBwg\nwMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\nttgJtRGJQctTZtZT\nCrZsJsPPZsGzwwsLwLmpwMDw\n"
+const EXAMPLE_OUTPUT = [157, 70]
 
-describe("2022/3", () => {
-  test("rucksackReorganizationPart1()", () => {
-    expect(rucksackReorganizationPart1(EXAMPLE_INPUT)).toBe(157)
-  })
+const PUZZLE_INPUT = getUniquePuzzleInput("2022/3")
+const PUZZLE_OUTPUT = [7_863, 2_488]
 
-  test("rucksackReorganizationPart2()", () => {
-    expect(rucksackReorganizationPart2(EXAMPLE_INPUT)).toBe(70)
-  })
+describe("[2022/3]", () => {
+  describe("examples", validateSolutions(fns, EXAMPLE_INPUT, ...EXAMPLE_OUTPUT))
+  describe("puzzle", validateSolutions(fns, PUZZLE_INPUT, ...PUZZLE_OUTPUT))
 })

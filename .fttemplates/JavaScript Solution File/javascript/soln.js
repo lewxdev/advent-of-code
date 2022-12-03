@@ -8,6 +8,6 @@ exports.<puzzleName | camelcase>Part2 = (input) => {}
 
 
 if (require.main === module) {
-  const testSolutions = require("testers/javascript")
+  const { testSolutions } = require("testers/javascript")
   testSolutions(__dirname, Object.values(exports))
 }

@@ -28,6 +28,7 @@
     "dotenv": "^16.0.3"
   },
   "jest": {
-    "testPathIgnorePatterns": [".fttemplates"]
+    "testPathIgnorePatterns": [".fttemplates"],
+    "modulePaths": ["<rootDir>/"]
   }
 }
