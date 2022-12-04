@@ -1,43 +1,34 @@
 // Find the challenge here: https://adventofcode.com/2022/day/4
 
-/** @param {string} sections */
-const expand = (sections) => {
-  const [start, end] = sections.split("-").map((section) => parseInt(section))
-  const result = []
+/** @param {"some"|"every"} method */
+const determineOverlaps = (method) =>
+  /** @param {string} input */
+  (input) =>
+    input.trim().split("\n").reduce((result, pairing) => {
+      const [assignmentA, assignmentB] =
+        pairing
+          .split(",")
+          .map((sections) => {
+            const result = []
+            const [start, end] =
+              sections.split("-").map((section) => parseInt(section))
 
-  for (let n = start; n <= end; n++) result.push(n)
-  return result
-}
+            for (let n = start; n <= end; n++) result.push(n)
+            return result
+          })
+          .sort((a, b) => b.length - a.length)
+
+      return assignmentB[method]((section) => assignmentA.includes(section))
+        ? ++result
+        : result
+    }, 0)
+
 
 /** @param {string} input - the provided puzzle input string */
-exports.campCleanupPart1 = (input) => {
-  return input.trim().split("\n").reduce((result, pairing) => {
-    const [assignmentA, assignmentB] =
-      pairing
-        .split(",")
-        .map(expand)
-        .sort((a, b) => b.length - a.length)
-
-    return assignmentB.every((section) => assignmentA.includes(section))
-      ? ++result
-      : result
-  }, 0)
-}
+exports.campCleanupPart1 = determineOverlaps("every")
 
 /** @param {string} input - the provided puzzle input string */
-exports.campCleanupPart2 = (input) => {
-  return input.trim().split("\n").reduce((result, pairing) => {
-    const [assignmentA, assignmentB] =
-      pairing
-        .split(",")
-        .map(expand)
-        .sort((a, b) => b.length - a.length)
-
-    return assignmentA.some((section) => assignmentB.includes(section))
-      ? ++result
-      : result
-  }, 0)
-}
+exports.campCleanupPart2 = determineOverlaps("some")
 
 
 if (require.main === module) {

@@ -9,5 +9,5 @@ const PUZZLE_OUTPUT = [584, 933]
 
 describe("[2022/4]", () => {
   describe("examples", validateSolutions(fns, EXAMPLE_INPUT, ...EXAMPLE_OUTPUT))
-  describe.skip("puzzle", validateSolutions(fns, PUZZLE_INPUT, ...PUZZLE_OUTPUT))
+  describe("puzzle", validateSolutions(fns, PUZZLE_INPUT, ...PUZZLE_OUTPUT))
 })
