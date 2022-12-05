@@ -1,7 +1,10 @@
 // Find the challenge here: https://adventofcode.com/2022/day/5
 
-/** @param {string} input - the provided puzzle input string */
-exports.supplyStacksPart1 = (input) => {
+/**
+ * @param {9000|9001} model
+ * @returns {(input: string) => string}
+ */
+const craneProcedureExecution = (model) => (input) => {
   const [initialVisual, procedure] = input.split("\n\n")
 
   /** @type {string[][]} */
@@ -23,15 +26,18 @@ exports.supplyStacksPart1 = (input) => {
 
   procedure.trim().split("\n").forEach((step) => {
     const [amount, from, to] = step.match(/\d+/g).map((match) => parseInt(match))
-    const crates = stacks[from - 1].splice(-amount, amount).reverse()
-    stacks[to - 1].push(...crates)
+    const crates = stacks[from - 1].splice(-amount, amount)
+    stacks[to - 1].push(...(model === 9001 ? crates : crates.reverse()))
   })
 
   return stacks.reduce((result, stack) => result += stack.at(-1) ?? "", "")
 }
 
 /** @param {string} input - the provided puzzle input string */
-exports.supplyStacksPart2 = (input) => {}
+exports.supplyStacksPart1 = craneProcedureExecution(9000)
+
+/** @param {string} input - the provided puzzle input string */
+exports.supplyStacksPart2 = craneProcedureExecution(9001)
 
 
 if (require.main === module) {
