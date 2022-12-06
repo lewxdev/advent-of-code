@@ -1,6 +1,5 @@
 const { getUniquePuzzleInput, validateSolutions } = require("testers/javascript")
-const fns = require("./soln")
-const { tuningTroublePart1, tuningTroublePart2 } = fns
+const solutions = require("./soln")
 
 const EXAMPLE_INPUT = [
   "mjqjpqmgbljsphdztnvjfqwrcgsmlb",
@@ -11,18 +10,14 @@ const EXAMPLE_INPUT = [
 ]
 const EXAMPLE_OUTPUT = [
   [7, 5, 6, 10, 11],
-  null
+  [19, 23, 23, 29, 26]
 ]
 
 const PUZZLE_INPUT = getUniquePuzzleInput("2022/6")
-const PUZZLE_OUTPUT = [null, null]
+const PUZZLE_OUTPUT = [1275, 3605]
 
 describe("[2022/6]", () => {
-  describe("examples", () => {
-    test.each(EXAMPLE_INPUT.map((input, index) => [input, EXAMPLE_OUTPUT[0][index]]))("tuningTroublePart1(%s) => %i", ([input, expected]) => {
-      expect(tuningTroublePart1(input)).toBe(expected)
-    })
-  })
+  describe("examples", validateSolutions(solutions, EXAMPLE_INPUT, ...EXAMPLE_OUTPUT))
 
-  describe.skip("puzzle", validateSolutions(fns, PUZZLE_INPUT, ...PUZZLE_OUTPUT))
+  describe("puzzle", validateSolutions(solutions, PUZZLE_INPUT, ...PUZZLE_OUTPUT))
 })

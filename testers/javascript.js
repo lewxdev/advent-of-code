@@ -33,22 +33,35 @@ exports.testSolutions = async (puzzleId, fns) => {
 /**
  * Provides a shorthand HOC for validating solutions against provided expected
  * results
- * @param {{ [name: string]: (input: string) => any }} fns - the soln.js `exports`
- * @param {Promise<string>|string} input - the input to provide to each function
+ * @param {{ [name: string]: (input: string) => any }} solutions - the soln.js `exports`
+ * @param {string|string[]|Promise<string>} input - the input to provide to each function
+ * @param {any[]} expected
  */
-exports.validateSolutions = (fns, input, ...expected) => () => {
-  beforeAll(async () => {
-    input = await input
-  })
-
+exports.validateSolutions = (solutions, input, ...expected) => () => {
   test.each(
     Object
-      .entries(fns)
-      .map(([name, fn], index) => ({ name, fn, expected: expected[index] }))
+      .entries(solutions)
+      .flatMap(([solutionName, solution], solutionIndex) =>
+        Array.isArray(input)
+          ? input.map((inputValue, inputIndex) => ({
+              expected: expected[solutionIndex][inputIndex],
+              index: inputIndex + 1,
+              inputValue,
+              solution,
+              solutionName,
+            }))
+          : {
+              expected: expected[solutionIndex],
+              index: solutionIndex + 1,
+              inputValue: input,
+              solution,
+              solutionName,
+            }
+      )
   )(
-    "$name() => $expected",
-    ({ fn, expected }) => {
-      expect(fn(input)).toBe(expected)
+    "$index: $solutionName(...) => $expected",
+    async ({ expected, inputValue, solution }) => {
+      expect(solution(await inputValue)).toBe(expected)
     }
   )
 }
