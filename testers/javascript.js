@@ -1,7 +1,18 @@
 /**
+ * @typedef {(input: string) => any} Solution
+ * @typedef {{ [name: string]: Solution }} NamedSolutions
+ * @typedef {{
+ * (namedSolutions: NamedSolutions, input: string|Promise<string>, expected: any[]) =>
+ *  () => void;
+ * (namedSolutions: NamedSolutions, input: string[], expected: any[][]) =>
+ *  () => void;
+ * }} ValidationFn
+ */
+
+/**
  * Dynamically retrieves the unique puzzle input from
  * [Advent of Code](https://adventofcode.com) via an authenticated HTTP request
- * @param {string} puzzleId - the puzzle ID or a delimited string including it
+ * @param {string} puzzleId - the puzzle ID or a string that contains it
  * @returns {Promise<string>} the unique puzzle input string
  */
 exports.getUniquePuzzleInput = (puzzleId) => {
@@ -19,28 +30,28 @@ exports.getUniquePuzzleInput = (puzzleId) => {
 }
 
 /**
- * Logs a list of solutions given the provided functions `fns`
- * @param {string} puzzleId - the puzzle ID or a delimited string including it
- * @param {((input: string) => any)[]} fns - an array of functions to test
+ * Logs a list of solutions given the provided solutions
+ * @param {string} puzzleId - the puzzle ID or a string that contains it
+ * @param {Solution[]} solutions - an array of functions to test
  */
-exports.testSolutions = async (puzzleId, fns) => {
+exports.testSolutions = async (puzzleId, solutions) => {
   const input = await this.getUniquePuzzleInput(puzzleId)
-  fns.forEach((fn, index) => {
-    console.log(`Solution ${index + 1}:`, fn(input))
+  solutions.forEach((solution, index) => {
+    console.log(`Solution ${index + 1}:`, solution(input))
   })
 }
 
 /**
- * Provides a shorthand HOC for validating solutions against provided expected
- * results
- * @param {{ [name: string]: (input: string) => any }} solutions - the soln.js `exports`
+ * Provides a shorthand for validating solutions against expected results
+ * @type {ValidationFn}
+ * @param {NamedSolutions} namedSolutions - the soln.js `exports`
  * @param {string|string[]|Promise<string>} input - the input to provide to each function
- * @param {any[]} expected
+ * @param {any[]|any[][]} expected - a list of expected results mapped to each function
  */
-exports.validateSolutions = (solutions, input, ...expected) => () => {
+exports.validateSolutions = (namedSolutions, input, expected) => () => {
   test.each(
     Object
-      .entries(solutions)
+      .entries(namedSolutions)
       .flatMap(([solutionName, solution], solutionIndex) =>
         Array.isArray(input)
           ? input.map((inputValue, inputIndex) => ({

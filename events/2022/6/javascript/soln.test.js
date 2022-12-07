@@ -14,10 +14,9 @@ const EXAMPLE_OUTPUT = [
 ]
 
 const PUZZLE_INPUT = getUniquePuzzleInput("2022/6")
-const PUZZLE_OUTPUT = [1275, 3605]
+const PUZZLE_OUTPUT = [1_275, 3_605]
 
 describe("[2022/6]", () => {
-  describe("examples", validateSolutions(solutions, EXAMPLE_INPUT, ...EXAMPLE_OUTPUT))
-
-  describe("puzzle", validateSolutions(solutions, PUZZLE_INPUT, ...PUZZLE_OUTPUT))
+  describe("examples", validateSolutions(solutions, EXAMPLE_INPUT, EXAMPLE_OUTPUT))
+  describe("puzzle", validateSolutions(solutions, PUZZLE_INPUT, PUZZLE_OUTPUT))
 })
