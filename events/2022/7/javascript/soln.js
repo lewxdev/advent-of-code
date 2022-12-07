@@ -1,13 +1,10 @@
 // Find the challenge here: https://adventofcode.com/2022/day/7
 
-/** @typedef {{ size: number; ".."?: string; }} Directory */
+/** @typedef {{ size: number; parent?: string; }} Directory */
 
 /** @param {string} input */
 const getFilePaths = (input) => {
   const { join } = require("path")
-
-  const COMMAND_PATTERN = /^\$\s(?:cd\s(?<directory>.+)|ls)$/
-  const OUTPUT_PATTERN = /^(?:dir\s(?<directory>.+)|(?<fileSize>\d+)\s.+)$/
 
   /** @type {{ [path: string]: Directory }} */
   const filePaths = { "/": { size: 0 } }
@@ -20,19 +17,19 @@ const getFilePaths = (input) => {
     if (!path) return
 
     callback(filePaths[path])
-    traverse(filePaths[path][".."], callback)
+    traverse(filePaths[path].parent, callback)
   }
 
   input.trim().split("\n").reduce(({ parent }, line) => {
     if (line.startsWith("$")) {
-      const { directory } = line.match(COMMAND_PATTERN).groups
+      const [directory] = line.match(/(?<=^\$\scd\s).+$|(?<=^\$\sls)/)
       return { parent: !directory ? parent : join(parent, directory) }
     }
 
-    const { directory, fileSize } = line.match(OUTPUT_PATTERN).groups
+    const { directory, fileSize } =
+      line.match(/^(?:dir\s(?<directory>.+)|(?<fileSize>\d+)\s.+)$/).groups
 
-    if (directory)
-      filePaths[join(parent, directory)] = { size: 0, "..": parent }
+    if (directory) filePaths[join(parent, directory)] = { size: 0, parent }
     else traverse(parent, (path) => path.size += parseInt(fileSize))
 
     return { parent }
@@ -56,7 +53,7 @@ exports.noSpaceLeftOnDevicePart2 = (input) => {
     .values(filePaths)
     .sort((a, b) => a.size - b.size)
     .find(({ size }) => size >= minFileSize)
-    .size
+    ?.size
 }
 
 if (require.main === module) {
