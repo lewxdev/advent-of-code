@@ -1,11 +1,11 @@
 // Find the challenge here: https://adventofcode.com/2022/day/9
 
-/** @typedef {[x: number, y: number]} Position */
-
-/** @param {string} input - the provided puzzle input string */
-exports.ropeBridgePart1 = (input) => {
-  /** @type {{ direction: "L" | "R" | "U" | "D"; steps: number }[]} */
-  const motions =
+/**
+ * @param {number} numKnots
+ * @returns {(input: string) => number}
+ */
+const getLastKnotUniqueMovements = (numKnots) => (input) => {
+  const movements =
     input
       .trim()
       .split("\n")
@@ -14,43 +14,44 @@ exports.ropeBridgePart1 = (input) => {
           motion.match(/^(?<direction>R|L|U|D)\s(?<steps>\d+)$/).groups
         return { direction, steps: parseInt(steps) }
       })
+      .reduce((acc, { direction, steps }) =>
+        [...Array(steps)].reduce((movementsRef) => {
+          const [[prevLeadX, prevLeadY], ...prevTailPositions] = movementsRef.at(-1)
+          return [...movementsRef, (
+            prevTailPositions.reduce((result, [x1, y1]) => {
+              const [x0, y0] = result.at(-1)
+              const deltaX = x0 - x1
+              const deltaY = y0 - y1
 
-  /**
-   * @param {Position} headPos
-   * @param {Position} prevTailPos
-   * @return {Position}
-   */
-  const getTailPosition = ([headX, headY], [prevTailX, prevTailY]) =>
-    Math.abs(headX - prevTailX) > 1 || Math.abs(headY - prevTailY) > 1
-      ? positions.at(-1).head
-      : [prevTailX, prevTailY]
+              return [...result, (
+                [deltaX, deltaY].some((delta) => Math.abs(delta) > 1)
+                  ? x0 === x1
+                    ? [x1, y1 + (deltaY < -1 ? -1 : 1)]
+                    : y0 === y1
+                      ? [x1 + (deltaX < -1 ? -1 : 1), y1]
+                      : [
+                        deltaX < -1 ? x1 - 1 : deltaX > 1 ? x1 + 1 : x0,
+                        deltaY < -1 ? y1 - 1 : deltaY > 1 ? y1 + 1 : y0
+                      ]
+                  : [x1, y1]
+              )]
+            }, [[
+              prevLeadX + (direction === "L" ? -1 : direction === "R" ? 1 : 0),
+              prevLeadY + (direction === "D" ? -1 : direction === "U" ? 1 : 0)
+            ]]
+            )
+          )
+          ]
+        }, acc), [Array.from(Array(numKnots), () => [0, 0])])
 
-  /** @type {{ head: Position; tail: Position }[]} */
-  const positions = [{ head: [0, 0], tail: [0, 0] }]
-
-  motions.forEach(({ direction, steps }) => {
-    for (let _ = 0; _ < steps; _++) {
-      const { head: [prevHeadX, prevHeadY], tail: prevTailPos } =
-        positions.at(-1)
-
-      /** @type {Position} */
-      const headPos = [
-        prevHeadX + (direction === "L" ? -1 : direction === "R" ? 1 : 0),
-        prevHeadY + (direction === "D" ? -1 : direction === "U" ? 1 : 0)
-      ]
-
-      positions.push({
-        head: headPos,
-        tail: getTailPosition(headPos, prevTailPos)
-      })
-    }
-  })
-
-  return new Set(positions.map(({ tail }) => `(${tail.join()})`)).size
+  return new Set(movements.map((positions) => positions.at(-1).join())).size
 }
 
 /** @param {string} input - the provided puzzle input string */
-exports.ropeBridgePart2 = (input) => {}
+exports.ropeBridgePart1 = getLastKnotUniqueMovements(2)
+
+/** @param {string} input - the provided puzzle input string */
+exports.ropeBridgePart2 = getLastKnotUniqueMovements(10)
 
 
 if (require.main === module) {

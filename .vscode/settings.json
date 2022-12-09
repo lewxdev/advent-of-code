@@ -120,5 +120,6 @@
     "watch": "off",
     "onStartup": "off",
     "onSave": "test-src-file"
-  }
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
