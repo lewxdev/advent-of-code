@@ -37,7 +37,7 @@ exports.getUniquePuzzleInput = (puzzleId) => {
 exports.testSolutions = async (puzzleId, solutions) => {
   const input = await this.getUniquePuzzleInput(puzzleId)
   solutions.forEach((solution, index) => {
-    console.log(`Solution ${index + 1}:`, solution(input))
+    console.log(`Solution ${index + 1}:\n${solution(input)}`)
   })
 }
 
