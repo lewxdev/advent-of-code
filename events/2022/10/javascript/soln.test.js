@@ -5,9 +5,9 @@ const EXAMPLE_INPUT = "addx 15\naddx -11\naddx 6\naddx -3\naddx 5\naddx -1\naddx
 const EXAMPLE_OUTPUT = [13_140, "##..##..##..##..##..##..##..##..##..##..\n###...###...###...###...###...###...###.\n####....####....####....####....####....\n#####.....#####.....#####.....#####.....\n######......######......######......####\n#######.......#######.......#######....."]
 
 const PUZZLE_INPUT = getUniquePuzzleInput("2022/10")
-const PUZZLE_OUTPUT = [17_380, null]
+const PUZZLE_OUTPUT = [17_380, "####..##...##..#..#.####.###..####..##..\n#....#..#.#..#.#..#....#.#..#.#....#..#.\n###..#....#....#..#...#..#..#.###..#....\n#....#.##.#....#..#..#...###..#....#....\n#....#..#.#..#.#..#.#....#.#..#....#..#.\n#.....###..##...##..####.#..#.####..##.."]
 
 describe("[2022/10]", () => {
   describe("examples", validateSolutions(solutions, EXAMPLE_INPUT, EXAMPLE_OUTPUT))
-  describe.skip("puzzle", validateSolutions(solutions, PUZZLE_INPUT, PUZZLE_OUTPUT))
+  describe("puzzle", validateSolutions(solutions, PUZZLE_INPUT, PUZZLE_OUTPUT))
 })
