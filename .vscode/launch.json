@@ -7,12 +7,19 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "[Node.js] Run Current",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "name": "[Node.js] JS Run Current",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
       "program": "${file}",
       "runtimeArgs": ["--no-warnings"],
+      "env": { "NODE_PATH": "${workspaceFolder}" }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "[Node.js] TS Run Current",
+      "skipFiles": ["<node_internals>/**", "node_modules/**"],
+      "program": "${file}",
+      "runtimeArgs": ["--no-warnings", "--nolazy", "-r", "ts-node/register/transpile-only"],
       "env": { "NODE_PATH": "${workspaceFolder}" }
     }
   ]
