@@ -50,8 +50,8 @@ This repository includes my personal solution framework for the
    solution changes. Alternatively, you can open the script in Visual Studio
    Code and run the `deno: dev` task from the command palette.
 
-   > [!IMPORTANT]
-   > When providing a filepath, be sure the path is a valid import path (e.g.
-   > relative to the project root: `./2020/01.ts` or an absolute path:
-   > `/home/user/projects/advent-of-code/2020/01.ts`). An error will be thrown
-   > if the path is invalid.
+> [!IMPORTANT]
+> When providing a filepath, be sure the path is a valid import path (e.g.
+> relative to the project root: `./2020/01.ts` or an absolute path:
+> `/home/user/projects/advent-of-code/2020/01.ts`). An error will be thrown
+> if the path is invalid.
