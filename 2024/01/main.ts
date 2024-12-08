@@ -22,8 +22,13 @@ function part1(): string {
 }
 
 function part2(): string {
-  // add your answer here
-  return "";
+  const [listA, listB] = parseInput();
+  return listA
+    .reduce((sum, valueA) => {
+      const occurrences = listB.filter((valueB) => valueA === valueB).length;
+      return valueA * occurrences + sum;
+    }, 0)
+    .toString();
 }
 
 export default function (part: "1" | "2"): string {
