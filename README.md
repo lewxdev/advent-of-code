@@ -53,5 +53,5 @@ This repository includes my personal solution framework for the
 > [!IMPORTANT]
 > When providing a filepath, be sure the path is a valid import path (e.g.
 > relative to the project root: `./2020/01.ts` or an absolute path:
-> `/home/user/projects/advent-of-code/2020/01.ts`). An error will be thrown
-> if the path is invalid.
+> `/home/user/projects/advent-of-code/2020/01.ts`). An error will be thrown if
+> the path is invalid.

@@ -113,7 +113,6 @@ console.log(answer);
 
 if (answer && answer !== prevSubmit && confirm("submit answer?")) {
   console.log("submitting answer...");
-  localStorage.setItem(`submit:${filepath}`, answer);
 
   const [day, year] = path.dirname(filepath).split("/").reverse().map(Number);
   const text = await aoc
@@ -126,14 +125,25 @@ if (answer && answer !== prevSubmit && confirm("submit answer?")) {
     })
     .text();
 
-  if (text.includes("That's the right answer!")) {
-    const state = level === "1" ? "2" : "done";
-    localStorage.setItem(`level:${filepath}`, state);
-    console.log("✔️ correct!");
-    console.log("   level: %s → %s", level, state);
-  } else if (text.includes("That's not the right answer.")) {
-    console.log("❌ incorrect.");
-  } else {
-    console.log("⚠️ cannot verify answer. :/");
+  const status = text.includes("That's the right answer!")
+    ? "✔️ correct!"
+    : text.includes("That's not the right answer.")
+    ? "❌ incorrect."
+    : text.includes("You gave an answer too recently")
+    ? "⚠️ timed out."
+    : "⚠️ error.";
+
+  console.log(status);
+  if (status === "✔️ correct!" || status === "❌ incorrect.") {
+    localStorage.setItem(`submit:${filepath}`, answer);
+
+    if (status === "✔️ correct!") {
+      const newLevel = level === "1" ? "2" : "done";
+      console.log("   level: %s → %s", level, newLevel);
+      localStorage.setItem(`level:${filepath}`, newLevel);
+    }
+  } else if (status === "⚠️ timed out.") {
+    const [, timeout] = text.match(/You have (\w+) left to wait\./) || [];
+    console.log("  please wait %s", timeout);
   }
 }
