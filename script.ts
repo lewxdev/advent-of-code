@@ -1,6 +1,7 @@
 #!/usr/bin/env -S deno run -E=AOC_SESSION -N=adventofcode.com -R=. -W=. --env-file=.env.local --watch
 
 import assert from "node:assert";
+import path from "node:path";
 import dedent from "npm:dedent";
 import ky from "npm:ky";
 import z from "npm:zod";
@@ -114,21 +115,25 @@ if (answer && answer !== prevSubmit && confirm("submit answer?")) {
   console.log("submitting answer");
   localStorage.setItem(`submit:${filepath}`, answer);
 
-  const params = new URLSearchParams();
-  params.set("level", level);
-  params.set("answer", answer);
-
+  const [day, year] = path.dirname(filepath).split("/").reverse().map(Number);
   const text = await aoc
-    // @ts-expect-error -- https://github.com/sindresorhus/ky#sending-form-data
-    .post(`${this.url}/answer`, { body: params })
+    .post(`${year}/day/${day}/answer`, {
+      // @ts-expect-error -- body is not present in types
+      body: `level=${level}&answer=${answer}`,
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+      },
+    })
     .text();
 
-  if (!text.includes("That's not the right answer.")) {
+  if (text.includes("That's the right answer!")) {
     const state = level === "1" ? "2" : "done";
     localStorage.setItem(`level:${filepath}`, state);
     console.log("✔️ correct!");
-    console.log("\t level: %s → %s", level, state);
-  } else {
+    console.log("   level: %s → %s", level, state);
+  } else if (text.includes("That's not the right answer.")) {
     console.log("❌ incorrect");
+  } else {
+    console.log("⚠️ cannot verify answer, try submitting manually :/");
   }
 }
