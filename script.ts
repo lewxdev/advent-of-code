@@ -99,7 +99,7 @@ const level = z
   .parse(localStorage.getItem(`level:${filepath}`) || "1");
 
 if (level === "done") {
-  console.log("answer already submitted");
+  console.log("this puzzle is complete.");
   Deno.exit();
 }
 
@@ -112,7 +112,7 @@ const answer = z
 console.log(answer);
 
 if (answer && answer !== prevSubmit && confirm("submit answer?")) {
-  console.log("submitting answer");
+  console.log("submitting answer...");
   localStorage.setItem(`submit:${filepath}`, answer);
 
   const [day, year] = path.dirname(filepath).split("/").reverse().map(Number);
@@ -132,8 +132,8 @@ if (answer && answer !== prevSubmit && confirm("submit answer?")) {
     console.log("✔️ correct!");
     console.log("   level: %s → %s", level, state);
   } else if (text.includes("That's not the right answer.")) {
-    console.log("❌ incorrect");
+    console.log("❌ incorrect.");
   } else {
-    console.log("⚠️ cannot verify answer, try submitting manually :/");
+    console.log("⚠️ cannot verify answer. :/");
   }
 }
