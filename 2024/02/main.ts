@@ -14,9 +14,8 @@ function part1(): string {
           .map((level, index) => level - report[index])
           .every((diff, _index, [refDiff]) => {
             const delta = Math.abs(diff);
-            const refSign = Math.sign(refDiff);
             const sign = Math.sign(diff);
-            return sign && refSign === sign && delta >= 1 && delta <= 3;
+            return delta >= 1 && delta <= 3 && sign === Math.sign(refDiff);
           })
         ? sum + 1
         : sum, 0)
@@ -24,8 +23,22 @@ function part1(): string {
 }
 
 function part2(): string {
-  // add your answer here
-  return "";
+  return parseInput()
+    .reduce((sum, report) =>
+      report.some((_level, index) => {
+          const adjustedReport = report.toSpliced(index, 1);
+          return adjustedReport
+            .slice(1)
+            .map((level, index) => level - adjustedReport[index])
+            .every((diff, _index, [refDiff]) => {
+              const delta = Math.abs(diff);
+              const sign = Math.sign(diff);
+              return delta >= 1 && delta <= 3 && sign === Math.sign(refDiff);
+            });
+        })
+        ? sum + 1
+        : sum, 0)
+    .toString();
 }
 
 export default function (part: "1" | "2"): string {
