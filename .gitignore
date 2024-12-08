@@ -1,0 +1,14 @@
+input.txt
+
+# environment
+.env.local
+
+# logs
+logs
+*.log
+
+# misc
+.DS_Store
+
+# typescript
+*.tsbuildinfo
