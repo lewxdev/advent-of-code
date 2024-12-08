@@ -1,5 +1,9 @@
 {
   "deno.enable": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "files.readonlyInclude": {
+    "**/input.txt": true,
+    "deno.lock": true
+  }
 }
