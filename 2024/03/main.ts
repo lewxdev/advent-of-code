@@ -14,8 +14,25 @@ function part1(): string {
 }
 
 function part2(): string {
-  // add your answer here
-  return "";
+  return input
+    .match(/do\(\)|don't\(\)|(?<=mul\()\d+,\d+(?=\))/g)
+    ?.reduce((acc, operation) => {
+      const isActive = operation === "do()" ||
+        (acc.isActive && operation !== "don't()");
+
+      return operation === "do()" || operation === "don't()"
+        ? { ...acc, isActive }
+        : {
+          ...acc,
+          sum: isActive
+            ? acc.sum + operation
+              .split(",")
+              .reduce((product, n) => product * Number(n), 1)
+            : acc.sum,
+        };
+    }, { isActive: true, sum: 0 })
+    .sum
+    .toString() || "0";
 }
 
 export default function (part: "1" | "2"): string {
