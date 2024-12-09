@@ -65,20 +65,23 @@ if (!filepath) {
   const content = dedent`
     // see: ${prefixUrl}/${eventUrl}
 
-    console.log("${title}");
-    const input = await Deno.readTextFile("${inputFile}");
+    const inputFileUrl = new URL(import.meta.resolve("./input.txt"));
+    const input = await Deno.readTextFile(inputFileUrl);
 
-    function part1(): string {
-      // add your answer here
-      return "";
+    function parseInput() {
+      return input;
     }
 
-    function part2(): string {
+    function part1() {
       // add your answer here
-      return "";
     }
 
-    export default function (part: "1" | "2"): string {
+    function part2() {
+      // add your answer here
+    }
+
+    export default function (part: "1" | "2") {
+      console.log("${title}");
       return part === "1" ? part1() : part2();
     }
 
@@ -104,21 +107,23 @@ if (level === "done") {
 }
 
 const answer = z
-  .object({
-    default: z.function().args(z.enum(["1", "2"])).returns(z.string()),
-  })
+  .object({ default: z.function().args(z.enum(["1", "2"])) })
   .parse(await import(filepath))
   .default(level);
-console.log(answer);
+const parsedAnswer = z.coerce.string().nullable().optional().parse(answer);
 
-if (answer && answer !== prevSubmit && confirm("submit answer?")) {
+console.log("part: %o", Number(level));
+console.log("answer: %o", answer);
+console.log("---");
+
+if (parsedAnswer && parsedAnswer !== prevSubmit && confirm("submit answer?")) {
   console.log("submitting answer...");
 
   const [day, year] = path.dirname(filepath).split("/").reverse().map(Number);
   const text = await aoc
     .post(`${year}/day/${day}/answer`, {
       // @ts-expect-error -- body is not present in types
-      body: `level=${level}&answer=${answer}`,
+      body: `level=${level}&answer=${parsedAnswer}`,
       headers: {
         "content-type": "application/x-www-form-urlencoded",
       },
@@ -135,7 +140,7 @@ if (answer && answer !== prevSubmit && confirm("submit answer?")) {
 
   console.log(status);
   if (status === "✔️ correct!" || status === "❌ incorrect.") {
-    localStorage.setItem(`submit:${filepath}`, answer);
+    localStorage.setItem(`submit:${filepath}`, parsedAnswer);
 
     if (status === "✔️ correct!") {
       const newLevel = level === "1" ? "2" : "done";
