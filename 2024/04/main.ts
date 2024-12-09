@@ -26,8 +26,15 @@ function part1(): string {
 }
 
 function part2(): string {
-  // add your answer here
-  return "";
+  // I got lazy, okay?
+  return [
+    /(?=(M)[XMAS](S)[XMAS\n]{139}(A)[XMAS\n]{139}(M)[XMAS](S))/g,
+    /(?=(M)[XMAS](M)[XMAS\n]{139}(A)[XMAS\n]{139}(S)[XMAS](S))/g,
+    /(?=(S)[XMAS](M)[XMAS\n]{139}(A)[XMAS\n]{139}(S)[XMAS](M))/g,
+    /(?=(S)[XMAS](S)[XMAS\n]{139}(A)[XMAS\n]{139}(M)[XMAS](M))/g,
+  ]
+    .reduce((sum, pattern) => sum + (input.match(pattern)?.length || 0), 0)
+    .toString();
 }
 
 export default function (part: "1" | "2"): string {
