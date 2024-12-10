@@ -1,7 +1,8 @@
 # 🎄 Advent of Code
 
 This repository includes my personal solution framework for the
-[Advent of Code](https://adventofcode.com) challenges. Capabilities include:
+[Advent of Code](https://adventofcode.com/about) challenges. Capabilities
+include:
 
 - **Automatic setup** - creates files for challenges and input data
 - **Easy submission** - submit solutions directly from the command line
@@ -43,7 +44,7 @@ This repository includes my personal solution framework for the
 1. **Run the dev script**
 
    ```shell
-   deno run dev <filepath>
+   deno run dev path/to/solution
    ```
 
    This will run the script in watch mode and prompt you to submit when the
@@ -52,6 +53,6 @@ This repository includes my personal solution framework for the
 
 > [!IMPORTANT]
 > When providing a filepath, be sure the path is a valid import path (e.g.
-> relative to the project root: `./2020/01.ts` or an absolute path:
-> `/home/user/projects/advent-of-code/2020/01.ts`). An error will be thrown if
-> the path is invalid.
+> relative to the project root: `./2020/01/main.ts` or an absolute path:
+> `/home/user/projects/advent-of-code/2020/01/main.ts`). An error will be thrown
+> if the path is invalid.
