@@ -23,7 +23,7 @@ include:
 1. **Create a `.env` file**
 
    ```shell
-   echo "AOC_SESSION=your_session_id" > .env
+   echo "AOC_SESSION=your_session_id" > .env.local
    ```
 
    Replace `your_session_id` with the session cookie found on the Advent of Code
