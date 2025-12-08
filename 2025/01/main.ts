@@ -28,7 +28,19 @@ function part1() {
 }
 
 function part2() {
-  // add your answer here
+  const digits = 100;
+  const rotations = parseInput();
+
+  let count = 0;
+  let value = 50;
+  for (const rotation of rotations) {
+    for (let step = 0; step < Math.abs(rotation); step++) {
+      value = (value % digits + Math.sign(rotation) % digits) % digits;
+      count += Number(value === 0);
+    }
+  }
+
+  return count;
 }
 
 export default function (part: "1" | "2") {
