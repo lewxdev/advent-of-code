@@ -1,5 +1,18 @@
 {
   "tasks": {
-    "dev": "./script.ts"
+    "dev": "deno run --env-file=.env.local --permission-set --watch ./script.ts"
+  },
+  "imports": {
+    "dedent": "npm:dedent",
+    "ky": "npm:ky",
+    "zod": "npm:zod"
+  },
+  "permissions": {
+    "default": {
+      "env": ["AOC_SESSION"],
+      "net": ["adventofcode.com"],
+      "read": ["."],
+      "write": ["."]
+    }
   }
 }

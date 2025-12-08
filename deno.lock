@@ -1,5 +1,5 @@
 {
-  "version": "4",
+  "version": "5",
   "specifiers": {
     "npm:@types/node@*": "22.5.4",
     "npm:dedent@*": "1.5.3",
@@ -25,5 +25,12 @@
     "zod@3.23.8": {
       "integrity": "sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g=="
     }
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:dedent@*",
+      "npm:ky@*",
+      "npm:zod@*"
+    ]
   }
 }

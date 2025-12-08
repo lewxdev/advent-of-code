@@ -1,10 +1,8 @@
-#!/usr/bin/env -S deno run -E=AOC_SESSION -N=adventofcode.com -R=. -W=. --env-file=.env.local --watch
-
 import assert from "node:assert";
 import path from "node:path";
-import dedent from "npm:dedent";
-import ky from "npm:ky";
-import z from "npm:zod";
+import dedent from "dedent";
+import ky from "ky";
+import z from "zod";
 
 const prefixUrl = "https://adventofcode.com";
 const aoc = ky.create({
@@ -122,7 +120,6 @@ if (parsedAnswer && parsedAnswer !== prevSubmit && confirm("submit answer?")) {
   const [day, year] = path.dirname(filepath).split("/").reverse().map(Number);
   const text = await aoc
     .post(`${year}/day/${day}/answer`, {
-      // @ts-expect-error -- body is not present in types
       body: `level=${level}&answer=${parsedAnswer}`,
       headers: {
         "content-type": "application/x-www-form-urlencoded",
